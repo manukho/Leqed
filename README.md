@@ -1,0 +1,2 @@
+# Leqed
+Latex equation editor

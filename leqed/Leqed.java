@@ -44,7 +44,7 @@ public class Leqed extends JFrame {
         editorP2 = new EditorP();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(1400, 600));
+        setPreferredSize(new Dimension(1200, 650));
         
     	getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
     	this.add(elementsP2);
@@ -56,6 +56,7 @@ public class Leqed extends JFrame {
         this.editorP2.setLeqed(this);
         this.latexP2.setLeqed(this);
         this.elementsP2.setLeqed(this);
+        elementsP2.setlpane(latexP2);
     }
     
     private void setupMenu(){

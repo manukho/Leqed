@@ -1,13 +1,9 @@
 package leqed;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
-import structure.Formula;
 
 /**
  *
@@ -16,7 +12,6 @@ import structure.Formula;
 public class EditorP extends JPanel {
 
     Leqed l;
-    ArrayList<Formula> formula;
     private JPanel formEd;
     public JLabel formL;
     private JScrollPane jScrollPane1;
@@ -34,26 +29,10 @@ public class EditorP extends JPanel {
         setPreferredSize(new Dimension(1200, 200));
         
         add(jScrollPane1);
-        
-        this.formula = new ArrayList<>();
     }
 
     void setLeqed(Leqed leqed){
         this.l = leqed;
         this.l.setFormed(formEd);
     }
-
-    void addFormula(Formula f){
-        this.formula.add(f);
-    }
-
-    void clearFormula(){
-        this.formula.clear();
-    }
-    
-    public ArrayList<Formula> getFormulae(){
-        return formula;
-    }
-
-
 }

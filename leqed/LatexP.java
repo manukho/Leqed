@@ -1,17 +1,15 @@
 package leqed;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
-
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-
-import structure.Formula;
 
 /**
- *
+ * LatexP is the Panel containing the Textpane with the LaTeX code
  * @author Manuela Hopp
  */
 public class LatexP extends javax.swing.JPanel {
@@ -19,7 +17,6 @@ public class LatexP extends javax.swing.JPanel {
     Leqed l;
     private JScrollPane jScrollPane1;
     private JTextPane ledit;
-    Document doc;
     
     /**
      * Creates new form LatexFrame
@@ -34,7 +31,9 @@ public class LatexP extends javax.swing.JPanel {
         jScrollPane1.setPreferredSize(dim);
 
         this.add(jScrollPane1);   
-        doc = ledit.getDocument();
+        
+        ledit.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "tabPressed");
+		ledit.getActionMap().put("tabPressed", new KeyAction("TAB"));
     }
 
     void setLeqed(Leqed leqed){
@@ -59,8 +58,13 @@ public class LatexP extends javax.swing.JPanel {
 		}
     }
     
-    private void selectNextBullet(int caret) {
-    	/* TODO: select next bullet from caret position*/
+    private boolean selectNextBullet(int caret) {
+    	if (!ledit.getText().contains("•")) return false;
+    	caret = ledit.getText().indexOf("•", caret);
+    	ledit.setCaretPosition(caret);
+    	ledit.select(caret, caret + 1);
+    	ledit.requestFocus();
+    	return true;
     }
 
 	/* write latex code into TextPane, for matrices */
@@ -87,5 +91,26 @@ public class LatexP extends javax.swing.JPanel {
     	if (ledit.getSelectedText() != null && ledit.getSelectedText().equals("•")) {
     		ledit.replaceSelection("");
     	}
+    }
+
+    private class KeyAction extends AbstractAction{
+
+		String key;
+    	
+    	KeyAction(String str){
+    		super();
+    		this.key = str;
+    	}
+    	
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			/* if tab is pressed, select the next bullet if it exists.
+			 * if it doesn't, move caret position to the end */
+			if (key.equals("TAB")) {
+				if (!selectNextBullet(ledit.getCaretPosition()))
+					ledit.setCaretPosition(ledit.getText().length());
+			}
+		}
+    	
     }
 }

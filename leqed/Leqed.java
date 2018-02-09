@@ -27,11 +27,11 @@ public class Leqed extends JFrame {
     private JMenuItem MI_Undo;
     private JMenu M_Edit;
     private JMenu M_qm;
-    private FormulaPanel editorP2;
-    private ElementsPanel elementsP2;
-    private JMenu jMenu1;
-    private JMenuBar jMenuBar1;
-    private LatexPanel latexP2;
+    private FormulaPanel fpanel;
+    private ElementsPanel epanel;
+    private JMenu menu;
+    private JMenuBar menubar;
+    private LatexPanel lpanel;
 
     /**
      * Creates new JFrame and adds its elements
@@ -39,29 +39,29 @@ public class Leqed extends JFrame {
     public Leqed() {
         this.formEd = null;
     	setupMenu();
-        elementsP2 = new ElementsPanel();
-        latexP2 = new LatexPanel();
-        editorP2 = new FormulaPanel();
+        epanel = new ElementsPanel();
+        lpanel = new LatexPanel();
+        fpanel = new FormulaPanel();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 650));
         
     	getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
-    	this.add(elementsP2);
-    	this.add(editorP2);
-    	this.add(latexP2);
+    	this.add(epanel);
+    	this.add(fpanel);
+    	this.add(lpanel);
 
         pack();        
         
-        this.editorP2.setLeqed(this);
-        this.latexP2.setLeqed(this);
-        this.elementsP2.setLeqed(this);
-        elementsP2.setlpane(latexP2);
+        this.fpanel.setLeqed(this);
+        this.lpanel.setLeqed(this);
+        this.epanel.setLeqed(this);
+        epanel.setlpane(lpanel);
     }
     
     private void setupMenu(){
-        jMenuBar1 = new JMenuBar();
-        jMenu1 = new JMenu();
+        menubar = new JMenuBar();
+        menu = new JMenu();
         MI_Exit = new JMenuItem();
         M_Edit = new JMenu();
         MI_Undo = new JMenuItem();
@@ -73,9 +73,9 @@ public class Leqed extends JFrame {
             	System.exit(0);
             }
         });
-        jMenu1.add(MI_Exit);
+        menu.add(MI_Exit);
 
-        jMenuBar1.add(jMenu1);
+        menubar.add(menu);
 
         M_Edit.add(MI_Undo);
 
@@ -86,24 +86,24 @@ public class Leqed extends JFrame {
         });
         M_Edit.add(MI_Clear);
 
-        jMenuBar1.add(M_Edit);
+        menubar.add(M_Edit);
 
-        jMenuBar1.add(M_qm);
+        menubar.add(M_qm);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menubar);
     }
 
     private void MI_ClearActionPerformed(ActionEvent evt) {
         this.formEd.removeAll();
-        this.latexP2.removeAll();
+        this.lpanel.removeAll();
     }
 
     void setFormed(JPanel p){
         this.formEd = p;
     }
 
-    FormulaPanel getEditorPanel(){
-        return this.editorP2;
+    FormulaPanel getFormulaPanel(){
+        return this.fpanel;
     }
 
     public static void main(String args[]) {

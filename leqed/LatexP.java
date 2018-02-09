@@ -19,7 +19,7 @@ public class LatexP extends javax.swing.JPanel {
     private JTextPane ledit;
     
     /**
-     * Creates new form LatexFrame
+     * Creates the JPanel containing the LaTeX code
      */
     public LatexP() {
     	
@@ -40,7 +40,7 @@ public class LatexP extends javax.swing.JPanel {
         this.l = leqed;
     }
     
-    /* write latex code into TextPane, for everything but matrices */
+    /** write latex code into TextPane, for everything but matrices */
     void setText(String text, int blnr) {
     	replaceBullet();
     	
@@ -58,6 +58,11 @@ public class LatexP extends javax.swing.JPanel {
 		}
     }
     
+    /**
+     * select the next bullet from the caret position and return true
+     * if there is none, do nothing and return false
+     * @return true if there is another bullet in the text, false otherwise
+     * */
     private boolean selectNextBullet(int caret) {
     	if (!ledit.getText().contains("•")) return false;
     	caret = ledit.getText().indexOf("•", caret);
@@ -67,7 +72,7 @@ public class LatexP extends javax.swing.JPanel {
     	return true;
     }
 
-	/* write latex code into TextPane, for matrices */
+	/** write latex code into TextPane, for matrices */
     void setMatrixText(String text, String mtype) {
     	replaceBullet();
     	int caret = ledit.getCaretPosition();
@@ -85,7 +90,7 @@ public class LatexP extends javax.swing.JPanel {
 		}
     }
     
-    /* if a bullet is selected, remove it. otherwise do nothing */
+    /** if a bullet is selected, remove it. otherwise do nothing */
     private void replaceBullet() {
     	// check whether null before calling equals to avoid nullpointerexception
     	if (ledit.getSelectedText() != null && ledit.getSelectedText().equals("•")) {

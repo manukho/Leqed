@@ -34,7 +34,7 @@ public class Leqed extends JFrame {
     private LatexP latexP2;
 
     /**
-     * Creates new form Leqed
+     * Creates new JFrame and adds its elements
      */
     public Leqed() {
         this.formEd = null;
@@ -106,15 +106,8 @@ public class Leqed extends JFrame {
         return this.editorP2;
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-
         Leqed l = new Leqed();
         l.setVisible(true);
-        
     }
-
-
 }

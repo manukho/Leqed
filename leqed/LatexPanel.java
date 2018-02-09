@@ -12,7 +12,7 @@ import javax.swing.text.BadLocationException;
  * LatexP is the Panel containing the Textpane with the LaTeX code
  * @author Manuela Hopp
  */
-public class LatexP extends javax.swing.JPanel {
+public class LatexPanel extends javax.swing.JPanel {
 
     Leqed l;
     private JScrollPane jScrollPane1;
@@ -21,7 +21,7 @@ public class LatexP extends javax.swing.JPanel {
     /**
      * Creates the JPanel containing the LaTeX code
      */
-    public LatexP() {
+    public LatexPanel() {
     	
         ledit = new JTextPane();
         jScrollPane1 = new JScrollPane(ledit);

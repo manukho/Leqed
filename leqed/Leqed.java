@@ -27,11 +27,11 @@ public class Leqed extends JFrame {
     private JMenuItem MI_Undo;
     private JMenu M_Edit;
     private JMenu M_qm;
-    private EditorP editorP2;
-    private ElementsP elementsP2;
+    private FormulaPanel editorP2;
+    private ElementsPanel elementsP2;
     private JMenu jMenu1;
     private JMenuBar jMenuBar1;
-    private LatexP latexP2;
+    private LatexPanel latexP2;
 
     /**
      * Creates new JFrame and adds its elements
@@ -39,9 +39,9 @@ public class Leqed extends JFrame {
     public Leqed() {
         this.formEd = null;
     	setupMenu();
-        elementsP2 = new ElementsP();
-        latexP2 = new LatexP();
-        editorP2 = new EditorP();
+        elementsP2 = new ElementsPanel();
+        latexP2 = new LatexPanel();
+        editorP2 = new FormulaPanel();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 650));
@@ -102,7 +102,7 @@ public class Leqed extends JFrame {
         this.formEd = p;
     }
 
-    EditorP getEditorPanel(){
+    FormulaPanel getEditorPanel(){
         return this.editorP2;
     }
 

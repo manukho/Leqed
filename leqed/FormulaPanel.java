@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
  *
  * @author Manuela Hopp
  */
-public class EditorP extends JPanel {
+public class FormulaPanel extends JPanel {
 
     Leqed l;
     private JPanel formEd;
@@ -19,7 +19,7 @@ public class EditorP extends JPanel {
     /**
      * Creates new panel for formula editor
      */
-    public EditorP() {
+    public FormulaPanel() {
         
         formEd = new JPanel();
         formEd.setPreferredSize(new Dimension(1400, 250));

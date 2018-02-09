@@ -27,10 +27,10 @@ import org.scilab.forge.jlatexmath.TeXIcon;
  *
  * @author Manuela Hopp
  */
-public class ElementsP extends JPanel {
+public class ElementsPanel extends JPanel {
 
     Leqed l;
-    LatexP lpane;
+    LatexPanel lpane;
     
     private JPanel accents;
     private JPanel arrows;
@@ -59,7 +59,7 @@ public class ElementsP extends JPanel {
     /**
      * Creates new form ElementsP
      */
-    public ElementsP() {
+    public ElementsPanel() {
         
         tabs = new JTabbedPane();
         setPreferredSize(new Dimension(1200, 200));
@@ -400,7 +400,7 @@ public class ElementsP extends JPanel {
         l = leqed;
     }
     
-    void setlpane(LatexP lp) {
+    void setlpane(LatexPanel lp) {
     	lpane = lp;
     }
     

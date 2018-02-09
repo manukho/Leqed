@@ -44,7 +44,7 @@ public class Leqed extends JFrame {
         fpanel = new FormulaPanel();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(1200, 650));
+        setPreferredSize(new Dimension(1250, 650));
         
     	getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
     	this.add(epanel);

@@ -55,15 +55,18 @@ public class ElementsPanel extends JPanel {
     private String[] arrstring;
     private String[] mats;
     private String ints[];
+    private Dimension dim;
 
     /**
      * Creates new form ElementsP
      */
     public ElementsPanel() {
+    	
+    	dim = new Dimension(1200, 200);
         
         tabs = new JTabbedPane();
-        setPreferredSize(new Dimension(1200, 200));
-        tabs.setPreferredSize(new Dimension(1200, 200));
+        setPreferredSize(dim);
+        tabs.setPreferredSize(dim);
 
         showGreekLetters();
         showBraces();
@@ -77,17 +80,20 @@ public class ElementsPanel extends JPanel {
         
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(tabs, GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE));
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(tabs, GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE));
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(tabs, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
     }
 
     private void showGreekLetters(){
+    	JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        p.setPreferredSize(dim);
         gr_letters = new JPanel();
-        gr_letters.setPreferredSize(new Dimension(1200, 200));
+        gr_letters.setPreferredSize(dim);
         gr_letters.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-        c.insets = new Insets(5,5,5,5);
+        c.insets = new Insets(3,3,3,3);
+        c.anchor = GridBagConstraints.WEST;
 
         TeXFormula formula;
         TeXIcon icon;
@@ -118,12 +124,13 @@ public class ElementsPanel extends JPanel {
 	        }
         }
 
-        tabs.addTab("λ", gr_letters);
+        p.add(gr_letters);
+        tabs.addTab("λ", p);
     }
 
     private void showBraces() {
         braces = new JPanel();
-        braces.setPreferredSize(new Dimension(1300, 200));
+        braces.setPreferredSize(dim);
         braces.setLayout(new BoxLayout(braces, BoxLayout.PAGE_AXIS));
         
         Dimension dim = new Dimension(5,0);
@@ -165,7 +172,7 @@ public class ElementsPanel extends JPanel {
 
     private void showArrows(){
     	arrows = new JPanel();
-        arrows.setPreferredSize(new Dimension(1300, 200));
+        arrows.setPreferredSize(dim);
         arrows.setLayout(new BoxLayout(arrows, BoxLayout.PAGE_AXIS));
         
         Dimension dim = new Dimension(5,0);
@@ -211,7 +218,7 @@ public class ElementsPanel extends JPanel {
 
     private void showMathSymbols() {
         math_sym = new JPanel();
-        math_sym.setPreferredSize(new Dimension(1200, 200));
+        math_sym.setPreferredSize(dim);
         math_sym.setLayout(new GridLayout(4, 22, 5, 5));
         
         TeXFormula formula;
@@ -356,7 +363,7 @@ public class ElementsPanel extends JPanel {
 
     private void showOther() {
         other_sym = new JPanel();
-        other_sym.setPreferredSize(new Dimension(1300, 200));
+        other_sym.setPreferredSize(dim);
         other_sym.setLayout(new BoxLayout(other_sym, BoxLayout.PAGE_AXIS));
         
         Dimension dim = new Dimension(55, 40);
@@ -489,7 +496,6 @@ public class ElementsPanel extends JPanel {
 				latex.append("} \n");
 
 				lpane.setMatrixText(latex.toString(), s);
-				
 				reset();
 			}
 		}

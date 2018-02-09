@@ -53,12 +53,15 @@ public class LatexPanel extends javax.swing.JPanel {
 				ledit.requestFocus();
 			}
 			
+			String cleanText = ledit.getText().replaceAll("•", "");
+			l.getFormulaPanel().render(cleanText);
+			
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
     }
-    
-    /**
+
+	/**
      * select the next bullet from the caret position and return true
      * if there is none, do nothing and return false
      * @return true if there is another bullet in the text, false otherwise

@@ -13,8 +13,12 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
+import javax.swing.SpinnerNumberModel;
 
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
@@ -294,7 +298,7 @@ public class ElementsP extends JPanel {
         	formula = new TeXFormula(matrizen[i]);
         	icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 14);
         	b.setIcon(icon);
-        	b.addActionListener(new ButtonListener(mats[i]));
+        	b.addActionListener(new MatrixButtonListener(mats[i]));
         	matrices.add(b);
         }
         tabs.addTab("matrices", matrices);
@@ -411,14 +415,11 @@ public class ElementsP extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (isIn(gletters, s) || isIn(symbA, s) || isIn(arrstring, s) || isIn(symbols, s) || isIn(ints, s)) {
-				lpane.setText(s + " ", 0);
-				return;
-			}
-			if (isIn(bracesA, s)) {
+			if (isIn(gletters, s) || isIn(symbA, s) || isIn(arrstring, s) || isIn(symbols, s) || isIn(ints, s) || isIn(bracesA, s)) {
 				lpane.setText(s, 0);
 				return;
 			}
+			
 			String bulletB = "{•}";
 			
 			if (isIn(accstring, s) || isIn(bracesB, s) || isIn(sscript, s) || isIn(mtext, s)) {
@@ -430,8 +431,6 @@ public class ElementsP extends JPanel {
 				lpane.setText(s + bulletB + bulletB, 2);
 				return;
 			}
-			
-			/* TODO: matrices */
 		}
 
 		private boolean isIn(String[] arr, String str) {
@@ -440,5 +439,73 @@ public class ElementsP extends JPanel {
 			}
 			return false;
 		}
+    }
+    
+    private class MatrixButtonListener implements ActionListener {
+		private String s;
+		private int rows;
+		private int cols;
+		
+		public MatrixButtonListener(String str) {
+			s = str;
+			rows = 1;
+			cols = 1;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (!isMatrix()) return; // this shouldn't happen. but if it does, just do nothing
+			JSpinner rowval = new JSpinner(new SpinnerNumberModel(1, 1, 50, 1)); // 50 is somewhat arbitrary as a maximum value
+			JSpinner colval = new JSpinner(new SpinnerNumberModel(1, 1, 50, 1));
+			
+			Object[] message = {
+					"number of rows: ", rowval,
+					"number of columns: ", colval,
+			};
+			
+			int option = JOptionPane.showConfirmDialog(matrices, message, "Dimension of " + s, JOptionPane.OK_CANCEL_OPTION);
+			if (option == JOptionPane.OK_OPTION) { // if it's not, do nothing
+				rows = (int) rowval.getValue();
+				cols = (int) colval.getValue();
+				
+				String bullet = "•";
+				
+				StringBuilder latex = new StringBuilder("\\begin{");
+				latex.append(s);
+				latex.append("} \n");
+				
+				for (int i = 0; i < rows; i++) {
+					for (int j = 0; j < cols; j++) {
+						latex.append(bullet);
+						if (j == cols-1) {
+							if (i != rows-1) latex.append(" \\\\");
+							latex.append("\n");
+						}
+						else latex.append(" & ");
+					}
+				}
+				
+				latex.append("\\end{");
+				latex.append(s);
+				latex.append("} \n");
+
+				lpane.setMatrixText(latex.toString(), s);
+				
+				reset();
+			}
+		}
+		
+		private boolean isMatrix() {
+			for (int i = 0; i < mats.length; i++) {
+				if (s.equals(mats[i])) return true;
+			}
+			return false;
+		}
+		
+		private void reset() {
+			rows = 1;
+			cols = 1;
+		}
+    	
     }
 }

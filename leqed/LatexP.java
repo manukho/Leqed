@@ -41,15 +41,13 @@ public class LatexP extends javax.swing.JPanel {
         this.l = leqed;
     }
     
+    /* write latex code into TextPane, for everything but matrices */
     void setText(String text, int blnr) {
-    	// check whether null before calling equals to avoid nullpointerexception
-    	if (ledit.getSelectedText() != null && ledit.getSelectedText().equals("•")) {
-    		ledit.replaceSelection("");
-    	}
+    	replaceBullet();
     	
     	try {
 			ledit.getDocument().insertString(ledit.getCaretPosition(), text, null);
-			if (blnr != 0) {
+			if (blnr != 0) { 
 				ledit.setCaretPosition(ledit.getCaretPosition() - 3*blnr + 1);
 				ledit.select(ledit.getCaretPosition(), ledit.getCaretPosition() + 1);
 				// request focus so we can see the selection
@@ -59,5 +57,35 @@ public class LatexP extends javax.swing.JPanel {
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    private void selectNextBullet(int caret) {
+    	/* TODO: select next bullet from caret position*/
+    }
+
+	/* write latex code into TextPane, for matrices */
+    void setMatrixText(String text, String mtype) {
+    	replaceBullet();
+    	int caret = ledit.getCaretPosition();
+    	int offset = 17;
+    	if (mtype.equals("matrix")) offset = 16;
+    	
+    	try {
+			ledit.getDocument().insertString(caret, text, null);
+			ledit.setCaretPosition(caret + offset);
+			ledit.select(caret + offset, caret + offset + 1);
+			ledit.requestFocus();
+			
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    /* if a bullet is selected, remove it. otherwise do nothing */
+    private void replaceBullet() {
+    	// check whether null before calling equals to avoid nullpointerexception
+    	if (ledit.getSelectedText() != null && ledit.getSelectedText().equals("•")) {
+    		ledit.replaceSelection("");
+    	}
     }
 }

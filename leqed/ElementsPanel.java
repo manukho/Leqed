@@ -422,7 +422,7 @@ public class ElementsPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (isIn(gletters, s) || isIn(symbA, s) || isIn(arrstring, s) || isIn(symbols, s) || isIn(ints, s) || isIn(bracesA, s)) {
-				lpane.setText(s, 0);
+				lpane.setText(s + " ", 0);
 				return;
 			}
 			

@@ -67,7 +67,7 @@ public class Leqed extends JFrame {
         MI_Undo = new JMenuItem();
         MI_Clear = new JMenuItem();
         M_qm = new JMenu();
-        MI_Exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
+        MI_Exit.setAccelerator(KeyStroke.getKeyStroke("control Q"));
         MI_Exit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             	System.exit(0);

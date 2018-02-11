@@ -42,6 +42,7 @@ public class LatexPanel extends javax.swing.JPanel {
     
     /** write latex code into TextPane, for everything but matrices */
     void setText(String text, int blnr) {
+    	ledit.requestFocusInWindow();
     	replaceBullet();
     	
     	try {
@@ -77,6 +78,7 @@ public class LatexPanel extends javax.swing.JPanel {
 
 	/** write latex code into TextPane, for matrices */
     void setMatrixText(String text, String mtype) {
+    	ledit.requestFocusInWindow();
     	replaceBullet();
     	int caret = ledit.getCaretPosition();
     	int offset = 17;
